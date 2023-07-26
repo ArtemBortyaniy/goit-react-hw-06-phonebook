@@ -1,30 +1,40 @@
-import PropTypes from 'prop-types';
-import css from './ContactsList.module.css'
+import css from './ContactsList.module.css';
+import { usePhonebookSelector } from 'redux/selectors';
+import { useFiltersSelector } from 'redux/selectors';
+import { detelePhone } from 'redux/features/phonebookSlice/phonebookSlice';
+import { useDispatch } from 'react-redux';
 
-export const ContactList = ({contacts, onDeleteContact}) => {
-    return (
-        <div className={css.container}>
-          <ul className={css.list}>
-            {contacts.map(({ id, name, number }) => {
-              return (
-                <li key={id} className={css.item}>
-                    <p>{ name }: { number}</p>
-                    <button type="button" onClick={() => onDeleteContact(id)} className={css.buttonDelete}>Delete</button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-    )
-}
+export const ContactList = () => {
+  const dispatch = useDispatch();
+  const phonebooks = usePhonebookSelector();
+  const filter = useFiltersSelector();
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onDeleteContact: PropTypes.func.isRequired,
+  const handleFilter = () => {
+    return phonebooks.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
+  return (
+    <div className={css.container}>
+      <ul className={css.list}>
+        {handleFilter().map(({ id, name, number }) => {
+          return (
+            <li key={id} className={css.item}>
+              <p>
+                {name}: {number}
+              </p>
+              <button
+                type="button"
+                className={css.buttonDelete}
+                onClick={() => dispatch(detelePhone(id))}
+              >
+                Delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 };
