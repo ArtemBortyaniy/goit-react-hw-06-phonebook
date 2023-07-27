@@ -4,19 +4,21 @@ import { persistReducer } from 'redux-persist';
 
 const phonebookSlice = createSlice({
   name: 'phonebook',
-  initialState: [
-    { id: 1, name: 'Artem', number: '0934530665' },
-    { id: 2, name: 'Artem', number: '0934530665' },
-  ],
+  initialState: {
+    items: [
+      { id: 1, name: 'Artem', number: '0934530665' },
+      { id: 2, name: 'Artem', number: '0934530665' },
+    ],
+  },
   reducers: {
     addPhone: {
       reducer(state, action) {
-        state.push(action.payload);
+        state.items.push(action.payload);
       },
     },
-    detelePhone: {
+    deletePhone: {
       reducer(state, action) {
-        return state.filter(entry => entry.id !== action.payload);
+        return state.items.filter(item => item.id !== action.payload);
       },
     },
   },

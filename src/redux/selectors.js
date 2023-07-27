@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 export const usePhonebookSelector = () => {
-  return useSelector(state => state.phonebook);
+  return useSelector(state => state.phonebook.items);
 };
 
 export const useFiltersSelector = () => {

@@ -18,7 +18,7 @@ export const ContactList = () => {
 
   return (
     <div className={css.container}>
-      {/* <ul className={css.list}>
+      <ul className={css.list}>
         {handleFilter().map(({ id, name, number }) => {
           return (
             <li key={id} className={css.item}>
@@ -35,7 +35,7 @@ export const ContactList = () => {
             </li>
           );
         })}
-      </ul> */}
+      </ul>
     </div>
   );
 };
