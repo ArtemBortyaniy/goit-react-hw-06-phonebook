@@ -2,11 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
-const phonebookInitState = [{ id: 1, name: 'Artem', number: '0934530665' }];
-
 const phonebookSlice = createSlice({
   name: 'phonebook',
-  initialState: phonebookInitState,
+  initialState: [
+    { id: 1, name: 'Artem', number: '0934530665' },
+    { id: 2, name: 'Artem', number: '0934530665' },
+  ],
   reducers: {
     addPhone: {
       reducer(state, action) {
