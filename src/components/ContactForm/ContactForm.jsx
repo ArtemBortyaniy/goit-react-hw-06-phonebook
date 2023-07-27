@@ -1,6 +1,5 @@
 import css from './ContactForm.module.css';
 import { useDispatch } from 'react-redux';
-import { usePhonebookSelector } from 'redux/selectors';
 import { nanoid } from '@reduxjs/toolkit';
 import { addPhone } from 'redux/features/phonebookSlice/phonebookSlice';
 
@@ -19,7 +18,6 @@ export const ContactForm = () => {
     );
     form.reset();
   };
-  console.log(usePhonebookSelector());
 
   return (
     <form className={css.form} onSubmit={handleSubmitForm}>
