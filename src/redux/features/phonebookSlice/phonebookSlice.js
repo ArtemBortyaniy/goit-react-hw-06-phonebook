@@ -18,7 +18,7 @@ const phonebookSlice = createSlice({
     },
     deletePhone: {
       reducer(state, action) {
-        return state.items.filter(item => item.id !== action.payload);
+        state.items = state.items.filter(item => item.id !== action.payload);
       },
     },
   },
@@ -34,4 +34,4 @@ export const persistedPhonebookReducer = persistReducer(
   phonebookSlice.reducer
 );
 
-export const { addPhone, detelePhone } = phonebookSlice.actions;
+export const { addPhone, deletePhone } = phonebookSlice.actions;

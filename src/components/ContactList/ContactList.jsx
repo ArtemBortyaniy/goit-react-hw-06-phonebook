@@ -1,20 +1,20 @@
 import css from './ContactsList.module.css';
-import { usePhonebookSelector } from 'redux/selectors';
-import { useFiltersSelector } from 'redux/selectors';
-import { detelePhone } from 'redux/features/phonebookSlice/phonebookSlice';
+import { getPhonebook } from 'redux/selectors';
+import { getFilter } from 'redux/selectors';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { deletePhone } from 'redux/features/phonebookSlice/phonebookSlice';
 import { useDispatch } from 'react-redux';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const phonebooks = usePhonebookSelector();
-  const filter = useFiltersSelector();
+  const phonebooks = useSelector(getPhonebook);
+  const filter = useSelector(getFilter);
 
   const handleFilter = () => {
     return phonebooks.filter(({ name }) =>
       name.toLowerCase().includes(filter.toLowerCase())
     );
   };
-  console.log(phonebooks);
 
   return (
     <div className={css.container}>
@@ -28,7 +28,7 @@ export const ContactList = () => {
               <button
                 type="button"
                 className={css.buttonDelete}
-                onClick={() => dispatch(detelePhone(id))}
+                onClick={() => dispatch(deletePhone(id))}
               >
                 Delete
               </button>
